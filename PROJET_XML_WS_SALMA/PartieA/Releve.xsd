@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" > 
+  <xsd:element name="releve">
+      <xsd:complexType>
+          <xsd:sequence>
+              <xsd:element name="datereleve" type="xsd:date" />
+              <xsd:element name="solde" type="xsd:unsignedShort" />
+              <xsd:element name="operations">
+                  <xsd:complexType>
+                      <xsd:sequence>
+                          <xsd:element maxOccurs="unbounded" name="operation">
+                              <xsd:complexType>
+                                  <xsd:attribute name="type" use="required">
+                                      <xsd:simpleType>
+                                          <xsd:restriction base="xsd:string">
+                                              <xsd:enumeration value="CREDIT"/>
+                                              <xsd:enumeration value="DEBIT"/>
+                                          </xsd:restriction>
+                                      </xsd:simpleType>
+                                  </xsd:attribute>                  
+                                  <xsd:attribute name="date" type="xsd:date" use="required" />
+                                  <xsd:attribute name="montant" use="required" >
+                                     <xsd:simpleType>
+                                         <xsd:restriction base="xsd:double">
+                                             <xsd:minInclusive value="1"></xsd:minInclusive>
+                                         </xsd:restriction>
+                                     </xsd:simpleType> 
+                                  </xsd:attribute>
+                                  <xsd:attribute name="description" type="xsd:string" use="required" />
+                              </xsd:complexType>
+                          </xsd:element>
+                      </xsd:sequence>
+                      <xsd:attribute name="datedebut" type="xsd:date" use="required" />
+                      <xsd:attribute name="datefin" type="xsd:date" use="required" />
+                  </xsd:complexType>
+              </xsd:element>
+          </xsd:sequence>
+          <xsd:attribute name="rib" type="xsd:string" use="required" />
+      </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>
